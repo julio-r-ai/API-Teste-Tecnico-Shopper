@@ -1,0 +1,9 @@
+{
+  "development": {
+    "username": "root",
+    "password": "Julio@21#",
+    "database": "ride_service",
+    "host": "localhost",
+    "dialect": "mysql"
+  }
+}
