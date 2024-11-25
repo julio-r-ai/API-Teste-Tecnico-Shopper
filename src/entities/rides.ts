@@ -16,7 +16,7 @@ export class Ride {
   destination: string;
 
   @Column({ type: "double" })
-  distance: Double;
+  distance: number;
 
   @Column()
   duration: string;

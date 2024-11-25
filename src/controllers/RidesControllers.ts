@@ -3,14 +3,14 @@ import { rideRepository } from "../repositories/rideRepository";
 import { Client } from "@googlemaps/google-maps-services-js";
 import { AppDataSource } from "../data-source";
 import { Ride } from "../entities/rides";
-
+ 
 const googleMapsClient = new Client({});
 
 export class RidesControllers {
     async create(req: Request, res: Response) {
         const { customerId, origin, destination, value, driver_id } = req.body;
 
-        if (!origin || !destination) {
+        if (!customerId || !origin || !destination) {
             res.status(400).json({ mensagem: "Campo obrigatório não preenchido." });
         }
 
@@ -56,26 +56,28 @@ export class RidesControllers {
     
             await rideRepository.save(newRide);
             res.status(201).json(newRide);
-
             
-        } catch (error) {
+        }catch(error) {
             console.error("Erro ao processar a solicitação:", error);
             res.status(500).json({ mensagem: "Erro interno do servidor" });
         };
-
-        
     };
 
-    async read(req: Request, res: Response): Promise<void> {
+    async read(req: Request, res: Response){
         const { id } = req.params;
         console.log('ID do parâmetro: ', id);
 
         try{
             const rideRepository = AppDataSource.getRepository(Ride);
-            const rides = await rideRepository.find();
-            res.status(200).json(rides);
+            const ride = await rideRepository.findOneBy({ id: parseInt(id, 10) });
+
+            if (!ride) {
+                res.status(404).json({ message: "Viagem não encontrada" });
+            }
+
+            res.status(200).json(ride);
         }catch{
             res.status(500).json({ message: "Erro ao listar viagens" });
-        };; 
+        };
     };
 };

@@ -14,15 +14,12 @@ export class Driver {
   @Column()
   vehicle: string;
 
-  @Column({ type: "float" })
-  rating: number;
-
   @Column()
   comment: string;
 
-  @Column({ type: "float", name: "rate_per_km" })
-  ratePerKm: number;
+  @Column()
+  ratePerKm: string;
 
-  @Column({ type: "float", name: "min_km" })
+  @Column({ type: "double", name: "min_km" })
   minKm: number;
 }
