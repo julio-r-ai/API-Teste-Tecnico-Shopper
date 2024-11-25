@@ -1,3 +1,13 @@
-import { server } from "./server/Server";
+import  express  from "express";
+import { AppDataSource } from "./data-source";
+import routes from "./routes";
 
-server.listen(process.env.PORT || 8080, ()=>{console.log(`Servidor rodando na porta ${process.env.PORT || 8080}`)});
+AppDataSource.initialize().then(() => {
+    const app = express();
+
+    app.use(express.json());
+
+    app.use(routes);
+
+    app.listen(process.env.PORT);
+})

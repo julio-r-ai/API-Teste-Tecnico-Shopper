@@ -1,2 +1,0 @@
-**API-Teste-Tecnico-Shopper
-**
