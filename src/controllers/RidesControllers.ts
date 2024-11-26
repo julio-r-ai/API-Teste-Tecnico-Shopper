@@ -42,8 +42,6 @@ export class RidesControllers {
 
             const duration = route.legs[0].duration.text;
 
-            console.log(`Resultado da distâcia foi: ${distance}, e duração foi: ${duration}`);
-
             const newRide = rideRepository.create({
                 customerId,
                 origin,
@@ -65,11 +63,10 @@ export class RidesControllers {
 
     async read(req: Request, res: Response){
         const { id } = req.params;
-        console.log('ID do parâmetro: ', id);
 
         try{
             const rideRepository = AppDataSource.getRepository(Ride);
-            const ride = await rideRepository.findOneBy({ id: parseInt(id, 10) });
+            const ride = await rideRepository.findOneBy({ id: parseInt(id, 10)});
 
             if (!ride) {
                 res.status(404).json({ message: "Viagem não encontrada" });
