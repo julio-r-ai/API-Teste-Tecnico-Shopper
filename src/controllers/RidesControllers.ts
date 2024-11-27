@@ -8,9 +8,9 @@ const googleMapsClient = new Client({});
 
 export class RidesControllers {
     async create(req: Request, res: Response) {
-        const { customerId, origin, destination, value, driver_id } = req.body;
+        const { customer_id, origin, destination } = req.body;
 
-        if (!customerId || !origin || !destination) {
+        if (!customer_id || !origin || !destination) {
             res.status(400).json({ mensagem: "Campo obrigatório não preenchido." });
         }
 
@@ -24,7 +24,7 @@ export class RidesControllers {
                     origin,
                     destination,
                     key: process.env.GOOGLE_API_KEY || 'AIzaSyAzO8b9j2-yTr1pk5VdypnzHxIo2sEnoVE',
-                },
+                }, //FAZER COM QUE A CHAVE DO GOOGLE NÂO MOSTRE DEPOIS
             });
 
             if (!response.data.routes || response.data.routes.length === 0) {
@@ -43,20 +43,17 @@ export class RidesControllers {
             const duration = route.legs[0].duration.text;
 
             const newRide = rideRepository.create({
-                customerId,
+                customer_id,
                 origin,
                 destination,
                 distance,
                 duration,
-                value,
-                driver_id,
             });
     
             await rideRepository.save(newRide);
             res.status(201).json(newRide);
             
         }catch(error) {
-            console.error("Erro ao processar a solicitação:", error);
             res.status(500).json({ mensagem: "Erro interno do servidor" });
         };
     };

@@ -6,8 +6,8 @@ export class Ride {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ name: "customer_id" })
-  customerId: number;
+  @Column()
+  customer_id: string;
 
   @Column()
   origin: string;
@@ -24,9 +24,6 @@ export class Ride {
   @ManyToOne(() => Driver)
   @JoinColumn({ name: "driver_id" })
   driver_id: Driver;
-
-  @Column({ type: "float" })
-  value: number;
 
   @Column({ type: "timestamp", default: () => "CURRENT_TIMESTAMP" })
   date: Date;

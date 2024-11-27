@@ -1,8 +1,11 @@
 import { Router } from "express";
 import { RidesControllers } from "./controllers/RidesControllers";
 import { DriversControllers } from "./controllers/DriversControllers";
+import cors from 'cors';
 
 const routes = Router();
+
+routes.use(cors());
 
 routes.post('/createRide', new RidesControllers().create);
 
