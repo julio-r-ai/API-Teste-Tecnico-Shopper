@@ -19,8 +19,6 @@ export const AppDataSource = new DataSource({
   logging: true,
   entities: [Driver, Ride],
   migrations: ["src/migration/*.ts"],
-  //entities: [`${__dirname}/**/entities/*.{td,js}`],
-  //migrations: [`${__dirname}/**/migrations/*.{td,js}`],
   subscribers: ["src/subscriber/**/*.ts"],
 });
 
