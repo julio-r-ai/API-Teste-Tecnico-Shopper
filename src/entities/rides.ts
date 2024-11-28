@@ -21,6 +21,9 @@ export class Ride {
   @Column()
   duration: string;
 
+  @Column({ type: 'decimal', precision: 10, scale: 2 })
+  value: number;
+
   @ManyToOne(() => Driver)
   @JoinColumn({ name: "driver_id" })
   driver_id: Driver;

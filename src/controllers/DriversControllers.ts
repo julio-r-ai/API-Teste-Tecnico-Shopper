@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
 import { AppDataSource } from "../data-source";
-import { driversRepository } from "../repositories/rideRepository";
 import { Driver } from "../entities/drivers";
 
 export class DriversControllers {

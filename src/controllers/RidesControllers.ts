@@ -8,7 +8,7 @@ const googleMapsClient = new Client({});
 
 export class RidesControllers {
     async create(req: Request, res: Response) {
-        const { customer_id, origin, destination } = req.body;
+        const { customer_id, origin, destination, velue } = req.body;
 
         if (!customer_id || !origin || !destination) {
             res.status(400).json({ mensagem: "Campo obrigatório não preenchido." });
@@ -24,7 +24,7 @@ export class RidesControllers {
                     origin,
                     destination,
                     key: process.env.GOOGLE_API_KEY || 'AIzaSyAzO8b9j2-yTr1pk5VdypnzHxIo2sEnoVE',
-                }, //FAZER COM QUE A CHAVE DO GOOGLE NÂO MOSTRE DEPOIS
+                }, 
             });
 
             if (!response.data.routes || response.data.routes.length === 0) {
