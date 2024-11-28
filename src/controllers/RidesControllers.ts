@@ -3,6 +3,9 @@ import { rideRepository } from "../repositories/rideRepository";
 import { Client } from "@googlemaps/google-maps-services-js";
 import { AppDataSource } from "../data-source";
 import { Ride } from "../entities/rides";
+import { configDotenv, DotenvConfigOptions } from "dotenv";
+
+configDotenv();
  
 const googleMapsClient = new Client({});
 
@@ -23,7 +26,7 @@ export class RidesControllers {
                 params: {
                     origin,
                     destination,
-                    key: process.env.GOOGLE_API_KEY || 'AIzaSyAzO8b9j2-yTr1pk5VdypnzHxIo2sEnoVE',
+                    key: process.env.GOOGLE_API_KEY,
                 }, 
             });
 
