@@ -1,5 +1,4 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn, Double } from "typeorm";
-import { Driver } from "./drivers";
 
 @Entity("rides")
 export class Ride {
@@ -24,9 +23,8 @@ export class Ride {
   @Column({ type: 'decimal', precision: 10, scale: 2 })
   value: number;
 
-  @ManyToOne(() => Driver)
-  @JoinColumn({ name: "driver_id" })
-  driver_id: Driver;
+  @Column({ type: "int" }) 
+  driver_id: number;
 
   @Column({ type: "timestamp", default: () => "CURRENT_TIMESTAMP" })
   date: Date;

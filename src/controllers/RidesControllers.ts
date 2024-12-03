@@ -6,11 +6,11 @@ import { Ride } from "../entities/rides";
 
 export class RidesControllers {
     async create(req: Request, res: Response) {
-        const { customer_id, origin, destination, velue } = req.body;
+        const { customer_id, origin, destination, distance, duration, driver_id, value } = req.body;
 
-        console.log('Dados que estão chegando: ', customer_id, origin, velue )
+        console.log('Dados que estão chegando: ', customer_id, origin, destination, distance, duration, driver_id, value)
 
-        if(!customer_id || !origin || !destination) {
+        if(!customer_id || !origin || !destination || !distance || !duration|| !driver_id || !value) {
             res.status(400).json({ mensagem: "Campo obrigatório não preenchido." });
         }
 
@@ -19,11 +19,14 @@ export class RidesControllers {
         }
 
         try{
-
             const newRide = rideRepository.create({
-                customer_id,
-                origin,
-                destination,
+                customer_id: customer_id, 
+                origin: origin, 
+                destination: destination, 
+                distance: distance, 
+                duration: duration, 
+                driver_id: driver_id, 
+                value: value,
             });
     
             await rideRepository.save(newRide);
@@ -49,5 +52,6 @@ export class RidesControllers {
         }catch{
             res.status(500).json({ message: "Erro ao listar viagens" });
         };
+
     };
 };
