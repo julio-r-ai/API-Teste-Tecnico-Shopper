@@ -9,9 +9,9 @@ const routes = Router();
 routes.use(cors());
 
 routes.post('/createRide', new RidesControllers().create);
+routes.post('/apiGoogle', new apiGoogle().read);
 
 routes.get('/listRide/:id', new RidesControllers().read);
 routes.get('/listDrivers', new DriversControllers().read);
-routes.get('/apiGoogle', new apiGoogle().read);
 
 export default routes;

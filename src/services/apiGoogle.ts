@@ -1,14 +1,25 @@
 import { Request, Response } from "express";
 import { Client } from "@googlemaps/google-maps-services-js";
+import { config } from "dotenv";
+
+config();
 
 const googleMapsClient = new Client({});
 
 export class apiGoogle {
     async read(req: Request, res: Response){
         const {origin, destination } = req.body;
+        console.log('VALORES RECEBIDOS: ', origin, destination);
+
         
         if (!origin || !destination) {
-            res.status(400).json({ error: 'Os campos chegtando vasio.' });
+            res.status(400).json({ error: 'Os campos estão chegando vasio.' });
+        }
+
+        const googleApiKey: string | undefined = process.env.GOOGLE_API_KEY;
+
+        if (!googleApiKey) {
+            throw new Error("A chave da API do Google não está configurada. Certifique-se de definir 'GOOGLE_API_KEY' no arquivo .env.");
         }
 
         try {
@@ -16,8 +27,8 @@ export class apiGoogle {
                 params: {
                     origin,
                     destination,
-                    key: process.env.GOOGLE_API_KEY || 'AIzaSyAzO8b9j2-yTr1pk5VdypnzHxIo2sEnoVE',
-                }, //FAZER COM QUE A CHAVE DO GOOGLE NÂO MOSTRE DEPOIS
+                    key: googleApiKey,
+                },
             });
             
             if (!response.data.routes || response.data.routes.length === 0) {
@@ -48,5 +59,5 @@ export class apiGoogle {
             res.status(500).json({ error: 'Failed to fetch geocode data' });
         }
 
+        };
     };
-};
