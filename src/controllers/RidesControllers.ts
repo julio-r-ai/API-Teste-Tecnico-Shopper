@@ -6,11 +6,11 @@ import { Ride } from "../entities/rides";
 
 export class RidesControllers {
     async create(req: Request, res: Response) {
-        const { customer_id, origin, destination, distance, duration, driver_id, value } = req.body;
+        const { customer_id, origin, destination, distance, duration, driver, value } = req.body;
 
-        console.log('Dados que estão chegando: ', customer_id, origin, destination, distance, duration, driver_id, value)
+        console.log('Dados que estão chegando: ', customer_id, origin, destination, distance, duration, driver, value)
 
-        if(!customer_id || !origin || !destination || !distance || !duration|| !driver_id || !value) {
+        if(!customer_id || !origin || !destination || !distance || !duration|| !driver || !value) {
             res.status(400).json({ mensagem: "Campo obrigatório não preenchido." });
         }
 
@@ -25,7 +25,7 @@ export class RidesControllers {
                 destination: destination, 
                 distance: distance, 
                 duration: duration, 
-                driver_id: driver_id, 
+                driver: driver, 
                 value: value,
             });
     

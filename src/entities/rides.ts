@@ -23,8 +23,8 @@ export class Ride {
   @Column({ type: 'decimal', precision: 10, scale: 2 })
   value: number;
 
-  @Column({ type: "int" }) 
-  driver_id: number;
+  @Column() 
+  driver: string;
 
   @Column({ type: "timestamp", default: () => "CURRENT_TIMESTAMP" })
   date: Date;
